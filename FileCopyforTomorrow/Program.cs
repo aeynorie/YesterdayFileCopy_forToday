@@ -11,18 +11,18 @@ namespace FileCopyforTomorrow
     {
         static void Main(string[] args)
         {
-            string TargetFile;
-            string TomorrowFileName;
             string TargetFileName;
+            string TomorrowFileName;
+            string AfterFileName;
 
-            TargetFile =  YesterdayFileName(DateTime.Now);
-            TomorrowFileName = AfterCopyName(DateTime.Now);
-
-            TargetFileName = @"C:\Data\TestFileReps\" + TargetFile;
+            TargetFileName =  YesterdayFileName(DateTime.Now);
+            TomorrowFileName = @"C:\Data\TestFileReps\" + AfterCopyName(DateTime.Now);
+            AfterFileName = @"C:\Data\TestFileReps\" + TargetFileName;
             
-            FileCopy_ChangeFileName(TomorrowFileName, TargetFileName);
+            FileCopy_ChangeFileName(TomorrowFileName, AfterFileName);
         }
 
+        //コピー対象の今日の日付のファイルの名前を取得する
         static string YesterdayFileName(DateTime dt)
         {
             string targetFile;
@@ -36,7 +36,7 @@ namespace FileCopyforTomorrow
         }
 
 
-
+        //明日の日にちのファイル名を取得する
         static string AfterCopyName(DateTime yesterday)
         {
             string todayFileName;
@@ -48,19 +48,14 @@ namespace FileCopyforTomorrow
             todayFileName = sb.ToString();
 
             return todayFileName;
+            return todayFileName;
         }
 
+        //リネームしてコピーを実施する
         static void FileCopy_ChangeFileName(string todayFile, string yesterdayFile)
         {
-            string todayFileName;
-            string Path = @"C:\Data\TestFileReps\";
-            todayFileName = Path + todayFile;
-            FileInfo f = new FileInfo(yesterdayFile);
-            f.CopyTo(todayFileName);
+            FileInfo newFile = new FileInfo(yesterdayFile);
+            newFile.CopyTo(todayFile);
         }
-
-
-
-
     }
 }
